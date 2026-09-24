@@ -1,0 +1,112 @@
+{
+  "client_name": "Harbourline Heating & Cooling",
+  "date": "September 12, 2026",
+
+  "impact": {
+    "metric_1": { "label": "Weekly Office Time Returned", "value": "6 hrs" },
+    "metric_2": { "label": "Plan Revenue Protected Yearly", "value": "$6,000" },
+    "cost_note": "Most fixes use tools already in place. New monthly cost is limited to a missed-call text-back feature (price needs verification)."
+  },
+
+  "summary": {
+    "pain": "Missed calls at peak times, repeated \"where's my technician\" calls, and invoices typed twice are consuming office time and letting urgent callers slip away, in a business with a loyal maintenance-plan base and a scheduling system the team already knows.",
+    "outcome": "Turning on features of the existing stack and repairing one broken integration can return <strong>about 6 office hours per week</strong> and stop maintenance-plan renewals from lapsing, without a platform migration."
+  },
+
+  "opportunity": { "value": "6", "label": "Hours You Can Reclaim Weekly", "focus": "Primary focus: time savings" },
+
+  "pain_points": [
+    { "id": "P1", "title": "Missed calls at peak times", "evidence": "People calling about a no-heat don't leave voicemails, they call the next company.", "quadrant": "quick_win" },
+    { "id": "P2", "title": "Technician status calls", "evidence": "Ten, fifteen calls a day in the busy season... It's the same loop every time.", "quadrant": "quick_win" },
+    { "id": "P3", "title": "Invoices typed twice", "evidence": "The sync was set up years ago and it broke and nobody fixed it. So everything gets typed twice.", "quadrant": "quick_win" },
+    { "id": "P4", "title": "Plan renewals lapsing", "evidence": "We had a bunch of plans lapse last year because nobody reached out for the renewal.", "quadrant": "major_project" },
+    { "id": "P5", "title": "Slow quotes, no follow-up", "evidence": "Some quotes take two or three days to go out. We don't really follow up on them.", "quadrant": "major_project" },
+    { "id": "P6", "title": "Manual Monday report", "evidence": "Takes him most of the morning. I'd want it quicker, not fancier.", "quadrant": "ignore" }
+  ],
+
+  "recommendations": [
+    {
+      "title": "Automatic \"On My Way\" and Visit Reminder Texts",
+      "tool": "Scheduling tool notifications (existing)",
+      "why": "Customers get the update before they think to call. The office stops relaying messages between customers and technicians who are mid-job.",
+      "complexity": "plug-and-play",
+      "monthly_cost": "$0 if included in current plan",
+      "cost_source": "needs verification",
+      "setup": "1 to 2 hours",
+      "saved": "About 2 office hours per week",
+      "addresses": ["P2"],
+      "top3": true
+    },
+    {
+      "title": "Repair the Scheduling-to-Accounting Sync",
+      "tool": "Existing Jobber to QuickBooks Online integration",
+      "why": "Invoices flow to accounting automatically, which removes the daily re-entry and the month-end mismatches it causes.",
+      "complexity": "some-setup",
+      "monthly_cost": "$0 (existing integration)",
+      "cost_source": "needs verification",
+      "setup": "Half a day, including one week of reconciliation checks",
+      "saved": "About 4 office hours per week",
+      "addresses": ["P3"],
+      "top3": true
+    },
+    {
+      "title": "Missed-Call Text-Back",
+      "tool": "Auto-reply feature from the business phone provider",
+      "why": "Every unanswered caller gets an instant text with a booking link, so urgent callers have a reason to wait instead of calling a competitor.",
+      "complexity": "plug-and-play",
+      "monthly_cost": "Varies by provider",
+      "cost_source": "needs verification",
+      "setup": "2 to 3 hours",
+      "saved": "Recovers callers who would otherwise hang up",
+      "addresses": ["P1"],
+      "top3": true
+    },
+    {
+      "title": "Maintenance Plans as Recurring Jobs",
+      "tool": "Recurring jobs and automated reminders in the scheduling tool",
+      "why": "Moving plans out of the spreadsheet means tune-ups and renewals are scheduled and reminded automatically, even in the busiest weeks.",
+      "complexity": "project",
+      "monthly_cost": "$0 if included in current plan",
+      "cost_source": "needs verification",
+      "setup": "2 to 3 days to migrate about 350 plans",
+      "saved": "Protects about $6,000 a year in plan revenue",
+      "addresses": ["P4"],
+      "top3": false
+    },
+    {
+      "title": "Same-Day Quotes with Automatic Follow-Up",
+      "tool": "Quote templates on a tablet plus automatic quote follow-ups",
+      "why": "Quotes go out from the driveway instead of the kitchen table, and follow-ups happen without anyone remembering to send them.",
+      "complexity": "some-setup",
+      "monthly_cost": "$0 if included in current plan",
+      "cost_source": "needs verification",
+      "setup": "1 to 2 days to build templates",
+      "saved": "Quotes out the same day",
+      "addresses": ["P5"],
+      "top3": false
+    }
+  ],
+
+  "quick_wins_plan": [
+    { "day": "1", "task": "Turn on visit reminders and \"on my way\" texts", "tool": "Scheduling tool" },
+    { "day": "2", "task": "Set up missed-call text-back with a booking link", "tool": "Phone provider" },
+    { "day": "3", "task": "Repair the accounting sync and start reconciliation checks", "tool": "Jobber + QuickBooks Online" },
+    { "day": "4", "task": "Build install quote templates and turn on quote follow-ups", "tool": "Scheduling tool" }
+  ],
+
+  "next_steps": [
+    "Migrate maintenance plans into <b>recurring jobs</b> before the next renewal cycle",
+    "Replace the Monday spreadsheet with a <b>saved report</b> in the scheduling tool",
+    "Review after one busy-season month: <b>missed calls, status calls, sync errors</b>"
+  ],
+
+  "assumptions": [
+    "Status calls: 12 per day at about 4 minutes each over 5 days is about 4 hours per week; automated texts are assumed to remove half.",
+    "Double entry: the owner's estimate of about 1 hour per day; a working sync is assumed to remove most of it.",
+    "Lapsed plans: the operations manager's estimate of about 30 plans at about $200 per year each.",
+    "Missed calls: the share of the roughly 40 weekly missed calls that were new customers is unknown, so no revenue is claimed for recommendation 3.",
+    "Feature availability depends on the current plan tier of each tool and has not been verified in this sample run."
+  ],
+
+  "sources": []
+}

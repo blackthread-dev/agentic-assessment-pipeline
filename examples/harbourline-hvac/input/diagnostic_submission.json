@@ -1,0 +1,17 @@
+{
+  "business": "Harbourline Heating & Cooling (fictional)",
+  "industry": "Residential HVAC",
+  "team_size": "11-25",
+  "submitted_at": "2026-09-08",
+  "answers": [
+    { "dimension": "Lead response", "question": "When a new customer calls and nobody is free, what happens?", "answer": "It goes to voicemail", "score": 0 },
+    { "dimension": "Lead response", "question": "How quickly do quotes go out after a site visit?", "answer": "Two to three days", "score": 1 },
+    { "dimension": "Customer updates", "question": "How do customers find out when a technician will arrive?", "answer": "They call the office", "score": 0 },
+    { "dimension": "Data entry", "question": "How many times is a completed job typed into a system?", "answer": "Twice", "score": 1 },
+    { "dimension": "Data entry", "question": "How often do your accounting and scheduling numbers disagree?", "answer": "Monthly", "score": 1 },
+    { "dimension": "Recurring revenue", "question": "How are maintenance plan renewals handled?", "answer": "Manually from a spreadsheet", "score": 1 },
+    { "dimension": "Reporting", "question": "How long does your weekly performance report take?", "answer": "Half a day", "score": 1 },
+    { "dimension": "Reporting", "question": "Can you see today's revenue without asking someone?", "answer": "Sometimes", "score": 2 }
+  ],
+  "free_text": "Busy season is chaos. The office can't answer phones, book, and invoice at the same time."
+}

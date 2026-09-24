@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workflow Assessment: Harbourline Heating &amp; Cooling</title>
+    <style>
+        :root {
+            --bg-color: #0B1220;
+            --panel-color: #111A2E;
+            --text-primary: #FFFFFF;
+            --text-secondary: #A9B4C8;
+            --border-color: #22304A;
+            --accent: #2BB3A3;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            background-color: var(--bg-color);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 18px;
+            line-height: 1.45;
+            overflow-x: hidden;
+        }
+
+        .page {
+            width: min(calc(100% - 48px), 1240px);
+            max-width: 1240px;
+            padding: clamp(32px, 8vw, 80px);
+            border-bottom: 1px solid var(--border-color);
+            box-sizing: border-box;
+        }
+
+        .cover {
+            text-align: center;
+            border: 1px solid var(--border-color);
+            margin: clamp(24px, 5vw, 50px) 0;
+            padding: clamp(56px, 10vw, 100px) clamp(20px, 5vw, 40px);
+        }
+
+        h1 { font-size: clamp(38px, 8vw, 52px); line-height: 1.04; margin: 0; font-weight: 800; letter-spacing: 0; overflow-wrap: anywhere; }
+        .meta { color: var(--text-secondary); margin-top: 25px; font-size: 16px; }
+
+        .section-title { font-size: clamp(30px, 6vw, 48px); line-height: 1.08; text-align: center; margin-bottom: 20px; overflow-wrap: anywhere; }
+        .divider { width: 100%; height: 1px; background: var(--border-color); margin: 40px 0; }
+        
+        .summary-block { text-align: center; margin-bottom: 60px; }
+        .summary-label { font-size: clamp(24px, 4.5vw, 30px); line-height: 1.18; font-weight: 700; margin-bottom: 20px; overflow-wrap: anywhere; }
+        .summary-body { color: var(--text-secondary); font-size: clamp(16px, 2.7vw, 20px); line-height: 1.6; max-width: 750px; margin: 0 auto; }
+
+        .opportunity-panel {
+            background: var(--panel-color);
+            border: 1px solid var(--border-color);
+            padding: clamp(28px, 6vw, 50px);
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .metric-circle {
+            width: clamp(74px, 18vw, 90px); height: clamp(74px, 18vw, 90px);
+            border: 3px solid var(--accent);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 25px;
+            font-size: clamp(30px, 8vw, 36px); font-weight: bold;
+            color: var(--accent);
+        }
+
+        .focus-text { font-size: 16px; color: var(--text-secondary); margin-top: 20px; text-transform: uppercase; letter-spacing: 1px; }
+
+        .matrix-svg {
+            max-width: 100%;
+            margin-top: 40px;
+            display: block;
+            height: auto;
+        }
+
+        .rec-item {
+            display: flex;
+            border: 1px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+
+        .rec-num {
+            background: #0F1829;
+            width: 100px;
+            display: flex; justify-content: center; padding-top: 40px;
+            font-size: 30px; font-weight: 900; color: var(--text-secondary);
+            border-right: 1px solid var(--border-color);
+            flex: 0 0 auto;
+        }
+
+        .rec-content { padding: 40px; flex: 1; min-width: 0; }
+        .rec-content h3 { margin: 0 0 15px 0; font-size: clamp(23px, 4vw, 28px); line-height: 1.15; overflow-wrap: anywhere; }
+        .rec-tool { font-size: 18px; color: var(--text-primary); font-weight: bold; margin-bottom: 20px; display: block; }
+        
+        .rec-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .stat-item { font-size: 16px; text-align: left; }
+        .stat-item b { color: var(--text-secondary); font-weight: 500; margin-right: 8px; }
+
+        .quick-plan {
+            margin-top: 50px;
+        }
+
+        .plan-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            row-gap: 50px;
+        }
+
+        .day-block {
+            display: flex;
+            gap: 25px;
+        }
+
+        .day-num {
+            background: #0F1829;
+            color: var(--text-secondary);
+            width: 55px;
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            font-weight: 800;
+            flex-shrink: 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .day-content {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .day-title { font-size: 28px; font-weight: 800; margin: 0; }
+        .day-detail { font-size: 18px; line-height: 1.5; margin: 0; color: var(--text-primary); }
+        .day-detail b { color: var(--text-secondary); font-weight: 500; margin-right: 6px; }
+
+        .next-steps {
+            margin-top: 50px;
+        }
+
+        .columns {
+            display: flex;
+            gap: 35px;
+            justify-content: space-between;
+        }
+
+        .next-step {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+
+        .step-divider {
+            width: 100%;
+            height: 2px;
+            background-color: var(--border-color);
+            margin-bottom: 25px;
+        }
+
+        .step-num {
+            font-size: 24px;
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .step-desc {
+            font-size: 20px;
+            line-height: 1.55;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        .step-desc b {
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+
+        .impact-container {
+            display: flex;
+            border: 1px solid var(--border-color);
+            margin-bottom: 25px;
+        }
+
+        .metric-box {
+            flex: 1;
+            padding: 50px 30px;
+            text-align: center;
+        }
+
+        .metric-box:first-child {
+            border-right: 1px solid var(--border-color);
+        }
+
+        .impact-label {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: var(--text-primary);
+        }
+
+        .impact-value {
+            font-size: clamp(48px, 10vw, 72px);
+            font-weight: 800;
+            letter-spacing: 0;
+            line-height: 1;
+            overflow-wrap: anywhere;
+        }
+
+        .cost-panel {
+            background-color: #0F1829;
+            padding: 25px 40px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border: 1px solid var(--border-color);
+        }
+
+        .cost-icon {
+            width: 18px;
+            height: 18px;
+            border: 1px solid var(--text-secondary);
+            border-radius: 3px;
+        }
+
+        .cost-text {
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--text-primary);
+            line-height: 1.5;
+            min-width: 0;
+        }
+
+        .badge { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 3px 8px; margin-bottom: 12px; }
+        .evidence { font-size: 14px; color: var(--text-secondary); margin-top: 6px; }
+        .list { color: var(--text-secondary); font-size: 16px; line-height: 1.6; max-width: 900px; margin: 0 auto; padding-left: 20px; }
+        .list li { margin-bottom: 8px; }
+
+        a {
+            color: inherit;
+            overflow-wrap: anywhere;
+        }
+
+        @page {
+            size: Letter;
+            margin: 0.45in;
+        }
+
+        @media print {
+            * {
+                -webkit-print-color-adjust: economy;
+                print-color-adjust: economy;
+            }
+
+            html,
+            body {
+                width: auto;
+                min-width: 0;
+                background-color: #FFFFFF;
+                color: #111111;
+                overflow: visible;
+            }
+
+            body {
+                display: block;
+                font-size: 12pt;
+            }
+
+            .page {
+                width: 100%;
+                max-width: none;
+                padding: 0;
+                border: none;
+                background: #FFFFFF;
+                color: #111111;
+                page-break-after: always;
+                break-after: page;
+            }
+
+            .page:last-child {
+                page-break-after: auto;
+                break-after: auto;
+            }
+
+            .cover {
+                margin: 0;
+                padding: 0.75in 0.35in;
+            }
+
+            .divider {
+                margin: 0.3in 0;
+            }
+
+            .section-title {
+                font-size: 30pt;
+            }
+
+            .summary-body {
+                font-size: 12pt;
+                color: #333333;
+            }
+
+            .impact-value {
+                font-size: 42pt;
+            }
+
+            .rec-content h3 {
+                font-size: 20pt;
+            }
+
+            .cover,
+            .opportunity-panel,
+            .rec-item,
+            .metric-box,
+            .cost-panel,
+            .day-block,
+            .next-step {
+                background: #FFFFFF;
+                color: #111111;
+                border-color: #D0D0D0;
+            }
+
+            .metric-box:first-child {
+                border-color: #D0D0D0;
+            }
+
+            .rec-num {
+                background: var(--accent);
+                color: #FFFFFF;
+            }
+
+            .meta,
+            .focus-text,
+            .rec-tool,
+            .day-detail,
+            .step-desc,
+            .cost-text,
+            .stat-item,
+            .source-list {
+                color: #333333;
+            }
+
+            .section-title,
+            .summary-label,
+            .impact-label,
+            .day-title,
+            .step-desc b,
+            .stat-item b {
+                color: #111111;
+            }
+
+            .divider,
+            .step-divider {
+                background: #D0D0D0;
+            }
+
+            a {
+                color: #111111;
+            }
+
+            .rec-item,
+            .day-block,
+            .next-step,
+            .impact-container {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+
+            .evidence,
+            .list {
+                color: #333333;
+            }
+        }
+
+        @media screen and (max-width: 1020px) {
+            .impact-container,
+            .columns {
+                flex-direction: column;
+            }
+
+            .metric-box:first-child {
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            .plan-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .rec-item {
+                flex-direction: column;
+            }
+
+            .rec-num {
+                width: 100%;
+                padding: 18px 0;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+            }
+        }
+
+        @media screen and (max-width: 640px) {
+            body {
+                font-size: 16px;
+            }
+
+            .page {
+                padding: 32px 18px;
+            }
+
+            .divider {
+                margin: 28px 0;
+            }
+
+            .summary-block {
+                margin-bottom: 42px;
+            }
+
+            .impact-label,
+            .day-title {
+                font-size: 24px;
+            }
+
+            .metric-box,
+            .rec-content,
+            .cost-panel,
+            .day-block {
+                padding: 24px 18px;
+            }
+
+            .cost-panel,
+            .day-block {
+                align-items: flex-start;
+            }
+
+            .cost-icon {
+                margin-top: 4px;
+            }
+
+            .rec-tool,
+            .cost-text,
+            .day-detail,
+            .step-desc {
+                font-size: 16px;
+            }
+
+            .rec-stats {
+                gap: 10px;
+            }
+
+            .day-block {
+                gap: 16px;
+                border: 1px solid var(--border-color);
+                background: var(--panel-color);
+            }
+
+            .day-num {
+                width: 44px;
+                height: 44px;
+                font-size: 22px;
+            }
+
+            .step-desc {
+                line-height: 1.5;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page">
+        <div class="cover">
+            <h1>Workflow Assessment</h1>
+            <div class="meta">Prepared for Harbourline Heating &amp; Cooling</div>
+            <div class="meta">Assessment Date: September 12, 2026</div>
+        </div>
+    </div>
+
+    <div class="page">
+        <div class="section-title">Financial Impact</div>
+        <div class="divider"></div>
+
+        <div class="impact-container">
+            <div class="metric-box">
+                <div class="impact-label">Weekly Office Time Returned</div>
+                <div class="impact-value">6 hrs</div>
+            </div>
+            <div class="metric-box">
+                <div class="impact-label">Plan Revenue Protected Yearly</div>
+                <div class="impact-value">$6,000</div>
+            </div>
+        </div>
+
+        <div class="cost-panel">
+            <div class="cost-icon"></div>
+            <div class="cost-text">Most fixes use tools already in place. New monthly cost is limited to a missed-call text-back feature (price needs verification).</div>
+        </div>
+    </div>
+
+    <div class="page">
+        <div class="section-title">Executive Summary</div>
+        <div class="divider"></div>
+        
+        <div class="summary-block">
+            <div class="summary-label">Pain</div>
+            <div class="summary-body">Missed calls at peak times, repeated &quot;where&#x27;s my technician&quot; calls, and invoices typed twice are consuming office time and letting urgent callers slip away, in a business with a loyal maintenance-plan base and a scheduling system the team already knows.</div>
+        </div>
+
+        <div class="summary-block">
+            <div class="summary-label">Outcome</div>
+            <div class="summary-body">Turning on features of the existing stack and repairing one broken integration can return <strong>about 6 office hours per week</strong> and stop maintenance-plan renewals from lapsing, without a platform migration.</div>
+        </div>
+
+        <div class="section-title">The Opportunity at a Glance</div>
+        <div class="opportunity-panel">
+            <div class="metric-circle">6</div>
+            <div class="summary-label">Hours You Can Reclaim Weekly</div>
+            <div class="focus-text">Primary focus: time savings</div>
+        </div>
+    </div>
+
+    <div class="page">
+        <div class="section-title">What We Heard</div>
+        <div class="divider"></div>
+        
+        <div class="rec-item">
+            <div class="rec-num">P1</div>
+            <div class="rec-content">
+                <h3>Missed calls at peak times</h3>
+                <div class="evidence">&ldquo;People calling about a no-heat don&#x27;t leave voicemails, they call the next company.&rdquo;</div>
+            </div>
+        </div>
+        
+        <div class="rec-item">
+            <div class="rec-num">P2</div>
+            <div class="rec-content">
+                <h3>Technician status calls</h3>
+                <div class="evidence">&ldquo;Ten, fifteen calls a day in the busy season... It&#x27;s the same loop every time.&rdquo;</div>
+            </div>
+        </div>
+        
+        <div class="rec-item">
+            <div class="rec-num">P3</div>
+            <div class="rec-content">
+                <h3>Invoices typed twice</h3>
+                <div class="evidence">&ldquo;The sync was set up years ago and it broke and nobody fixed it. So everything gets typed twice.&rdquo;</div>
+            </div>
+        </div>
+        
+        <div class="rec-item">
+            <div class="rec-num">P4</div>
+            <div class="rec-content">
+                <h3>Plan renewals lapsing</h3>
+                <div class="evidence">&ldquo;We had a bunch of plans lapse last year because nobody reached out for the renewal.&rdquo;</div>
+            </div>
+        </div>
+        
+        <div class="rec-item">
+            <div class="rec-num">P5</div>
+            <div class="rec-content">
+                <h3>Slow quotes, no follow-up</h3>
+                <div class="evidence">&ldquo;Some quotes take two or three days to go out. We don&#x27;t really follow up on them.&rdquo;</div>
+            </div>
+        </div>
+        
+        <div class="rec-item">
+            <div class="rec-num">P6</div>
+            <div class="rec-content">
+                <h3>Manual Monday report</h3>
+                <div class="evidence">&ldquo;Takes him most of the morning. I&#x27;d want it quicker, not fancier.&rdquo;</div>
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="page">
+        <div class="section-title">Impact-Effort Matrix</div>
+        <div class="divider"></div>
+        <div class="summary-body" style="text-align: center;">Your pain points have been analyzed and placed into four quadrants based on their business impact and implementation effort.</div>
+        
+        <svg class="matrix-svg" viewBox="0 0 650 480" xmlns="http://www.w3.org/2000/svg">
+            <line x1="80" y1="60" x2="80" y2="380" stroke="#333" stroke-width="2"/>
+            <line x1="80" y1="380" x2="600" y2="380" stroke="#333" stroke-width="2"/>
+
+            <text x="340" y="450" text-anchor="middle" fill="#666" font-size="14" font-weight="600">EFFORT →</text>
+            <text x="30" y="220" text-anchor="middle" fill="#666" font-size="14" font-weight="600" transform="rotate(-90, 30, 220)">IMPACT →</text>
+
+            <polygon points="600,375 600,385 615,380" fill="#666"/>
+            <polygon points="75,60 85,60 80,45" fill="#666"/>
+
+            <line x1="340" y1="60" x2="340" y2="380" stroke="#2a2a2a" stroke-width="1" stroke-dasharray="4,4"/>
+            <line x1="80" y1="220" x2="600" y2="220" stroke="#2a2a2a" stroke-width="1" stroke-dasharray="4,4"/>
+
+            <rect x="90" y="70" width="240" height="140" rx="4" fill="#0F1829" stroke="#444" stroke-width="1.5"/>
+            <text x="210" y="110" text-anchor="middle" fill="#FFFFFF" font-size="16" font-weight="700">Quick Wins</text>
+            <text x="210" y="128" text-anchor="middle" fill="#666" font-size="11">High Impact, Low Effort</text>
+            
+            <text x="210" y="155" text-anchor="middle" fill="#B8B8B8" font-size="12">• Missed calls at peak times</text>
+            
+            <text x="210" y="172" text-anchor="middle" fill="#B8B8B8" font-size="12">• Technician status calls</text>
+            
+            <text x="210" y="189" text-anchor="middle" fill="#B8B8B8" font-size="12">• Invoices typed twice</text>
+            
+
+            <rect x="350" y="70" width="240" height="140" rx="4" fill="#111A2E" stroke="#444" stroke-width="1.5"/>
+            <text x="470" y="110" text-anchor="middle" fill="#FFFFFF" font-size="16" font-weight="700">Major Projects</text>
+            <text x="470" y="128" text-anchor="middle" fill="#666" font-size="11">High Impact, High Effort</text>
+            
+            <text x="470" y="155" text-anchor="middle" fill="#B8B8B8" font-size="12">• Plan renewals lapsing</text>
+            
+            <text x="470" y="172" text-anchor="middle" fill="#B8B8B8" font-size="12">• Slow quotes, no follow-up</text>
+            
+
+            <rect x="90" y="230" width="240" height="140" rx="4" fill="#0C1424" stroke="#333" stroke-width="1"/>
+            <text x="210" y="270" text-anchor="middle" fill="#666" font-size="16" font-weight="700">Ignore These</text>
+            <text x="210" y="288" text-anchor="middle" fill="#444" font-size="11">Low Impact, Low Effort</text>
+            
+            <text x="210" y="315" text-anchor="middle" fill="#555" font-size="12">• Manual Monday report</text>
+            
+
+            <rect x="350" y="230" width="240" height="140" rx="4" fill="#0E1627" stroke="#333" stroke-width="1.5"/>
+            <text x="470" y="270" text-anchor="middle" fill="#888" font-size="16" font-weight="700">Fill-ins</text>
+            <text x="470" y="288" text-anchor="middle" fill="#555" font-size="11">Low Impact, High Effort</text>
+            
+
+            <text x="200" y="55" text-anchor="middle" fill="#888" font-size="10">HIGH</text>
+            <text x="460" y="55" text-anchor="middle" fill="#888" font-size="10">HIGH</text>
+            <text x="200" y="420" text-anchor="middle" fill="#555" font-size="10">LOW</text>
+            <text x="460" y="420" text-anchor="middle" fill="#555" font-size="10">LOW</text>
+        </svg>
+    </div>
+
+    <div class="page">
+        <div class="section-title">Recommended Solutions</div>
+        <div class="divider"></div>
+
+        
+        <div class="rec-item">
+            <div class="rec-num">1</div>
+            <div class="rec-content">
+                <span class="badge">Top 3 priority</span>
+                <h3>Automatic &quot;On My Way&quot; and Visit Reminder Texts</h3>
+                <span class="rec-tool">Recommended Tool: Scheduling tool notifications (existing)</span>
+                <div class="summary-body" style="margin: 0; font-size: 16px;"><b>Why This Fits:</b> Customers get the update before they think to call. The office stops relaying messages between customers and technicians who are mid-job.</div>
+                <div class="rec-stats">
+                    <div class="stat-item"><b>Complexity:</b> plug-and-play</div>
+                    <div class="stat-item"><b>Monthly Cost:</b> $0 if included in current plan</div>
+                    <div class="stat-item"><b>Setup Time:</b> 1 to 2 hours</div>
+                    <div class="stat-item"><b>Time Saved:</b> About 2 office hours per week</div>
+                    <div class="stat-item"><b>Addresses:</b> P2</div>
+                    <div class="stat-item"><b>Cost source:</b> needs verification</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="rec-item">
+            <div class="rec-num">2</div>
+            <div class="rec-content">
+                <span class="badge">Top 3 priority</span>
+                <h3>Repair the Scheduling-to-Accounting Sync</h3>
+                <span class="rec-tool">Recommended Tool: Existing Jobber to QuickBooks Online integration</span>
+                <div class="summary-body" style="margin: 0; font-size: 16px;"><b>Why This Fits:</b> Invoices flow to accounting automatically, which removes the daily re-entry and the month-end mismatches it causes.</div>
+                <div class="rec-stats">
+                    <div class="stat-item"><b>Complexity:</b> some-setup</div>
+                    <div class="stat-item"><b>Monthly Cost:</b> $0 (existing integration)</div>
+                    <div class="stat-item"><b>Setup Time:</b> Half a day, including one week of reconciliation checks</div>
+                    <div class="stat-item"><b>Time Saved:</b> About 4 office hours per week</div>
+                    <div class="stat-item"><b>Addresses:</b> P3</div>
+                    <div class="stat-item"><b>Cost source:</b> needs verification</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="rec-item">
+            <div class="rec-num">3</div>
+            <div class="rec-content">
+                <span class="badge">Top 3 priority</span>
+                <h3>Missed-Call Text-Back</h3>
+                <span class="rec-tool">Recommended Tool: Auto-reply feature from the business phone provider</span>
+                <div class="summary-body" style="margin: 0; font-size: 16px;"><b>Why This Fits:</b> Every unanswered caller gets an instant text with a booking link, so urgent callers have a reason to wait instead of calling a competitor.</div>
+                <div class="rec-stats">
+                    <div class="stat-item"><b>Complexity:</b> plug-and-play</div>
+                    <div class="stat-item"><b>Monthly Cost:</b> Varies by provider</div>
+                    <div class="stat-item"><b>Setup Time:</b> 2 to 3 hours</div>
+                    <div class="stat-item"><b>Time Saved:</b> Recovers callers who would otherwise hang up</div>
+                    <div class="stat-item"><b>Addresses:</b> P1</div>
+                    <div class="stat-item"><b>Cost source:</b> needs verification</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="rec-item">
+            <div class="rec-num">4</div>
+            <div class="rec-content">
+                
+                <h3>Maintenance Plans as Recurring Jobs</h3>
+                <span class="rec-tool">Recommended Tool: Recurring jobs and automated reminders in the scheduling tool</span>
+                <div class="summary-body" style="margin: 0; font-size: 16px;"><b>Why This Fits:</b> Moving plans out of the spreadsheet means tune-ups and renewals are scheduled and reminded automatically, even in the busiest weeks.</div>
+                <div class="rec-stats">
+                    <div class="stat-item"><b>Complexity:</b> project</div>
+                    <div class="stat-item"><b>Monthly Cost:</b> $0 if included in current plan</div>
+                    <div class="stat-item"><b>Setup Time:</b> 2 to 3 days to migrate about 350 plans</div>
+                    <div class="stat-item"><b>Time Saved:</b> Protects about $6,000 a year in plan revenue</div>
+                    <div class="stat-item"><b>Addresses:</b> P4</div>
+                    <div class="stat-item"><b>Cost source:</b> needs verification</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="rec-item">
+            <div class="rec-num">5</div>
+            <div class="rec-content">
+                
+                <h3>Same-Day Quotes with Automatic Follow-Up</h3>
+                <span class="rec-tool">Recommended Tool: Quote templates on a tablet plus automatic quote follow-ups</span>
+                <div class="summary-body" style="margin: 0; font-size: 16px;"><b>Why This Fits:</b> Quotes go out from the driveway instead of the kitchen table, and follow-ups happen without anyone remembering to send them.</div>
+                <div class="rec-stats">
+                    <div class="stat-item"><b>Complexity:</b> some-setup</div>
+                    <div class="stat-item"><b>Monthly Cost:</b> $0 if included in current plan</div>
+                    <div class="stat-item"><b>Setup Time:</b> 1 to 2 days to build templates</div>
+                    <div class="stat-item"><b>Time Saved:</b> Quotes out the same day</div>
+                    <div class="stat-item"><b>Addresses:</b> P5</div>
+                    <div class="stat-item"><b>Cost source:</b> needs verification</div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="page">
+        <div class="section-title">4-Day Quick Wins Plan</div>
+        <div class="divider"></div>
+
+        <div class="quick-plan">
+            <div class="plan-grid">
+                
+                <div class="day-block">
+                    <div class="day-num">1</div>
+                    <div class="day-content">
+                        <p class="day-title">Day 1</p>
+                        <p class="day-detail"><b>Task:</b> Turn on visit reminders and &quot;on my way&quot; texts</p>
+                        <p class="day-detail"><b>Tool:</b> Scheduling tool</p>
+                    </div>
+                </div>
+                
+                <div class="day-block">
+                    <div class="day-num">2</div>
+                    <div class="day-content">
+                        <p class="day-title">Day 2</p>
+                        <p class="day-detail"><b>Task:</b> Set up missed-call text-back with a booking link</p>
+                        <p class="day-detail"><b>Tool:</b> Phone provider</p>
+                    </div>
+                </div>
+                
+                <div class="day-block">
+                    <div class="day-num">3</div>
+                    <div class="day-content">
+                        <p class="day-title">Day 3</p>
+                        <p class="day-detail"><b>Task:</b> Repair the accounting sync and start reconciliation checks</p>
+                        <p class="day-detail"><b>Tool:</b> Jobber + QuickBooks Online</p>
+                    </div>
+                </div>
+                
+                <div class="day-block">
+                    <div class="day-num">4</div>
+                    <div class="day-content">
+                        <p class="day-title">Day 4</p>
+                        <p class="day-detail"><b>Task:</b> Build install quote templates and turn on quote follow-ups</p>
+                        <p class="day-detail"><b>Tool:</b> Scheduling tool</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="page">
+        <div class="section-title">What Comes After Quick Wins</div>
+        <div class="divider"></div>
+
+        <div class="next-steps">
+            <div class="columns">
+                
+                <div class="next-step">
+                    <div class="step-divider"></div>
+                    <div class="step-num">01</div>
+                    <p class="step-desc">Migrate maintenance plans into <b>recurring jobs</b> before the next renewal cycle</p>
+                </div>
+                
+                <div class="next-step">
+                    <div class="step-divider"></div>
+                    <div class="step-num">02</div>
+                    <p class="step-desc">Replace the Monday spreadsheet with a <b>saved report</b> in the scheduling tool</p>
+                </div>
+                
+                <div class="next-step">
+                    <div class="step-divider"></div>
+                    <div class="step-num">03</div>
+                    <p class="step-desc">Review after one busy-season month: <b>missed calls, status calls, sync errors</b></p>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="page">
+        <div class="section-title">Assumptions &amp; Sources</div>
+        <div class="divider"></div>
+        <ul class="list">
+            <li>Status calls: 12 per day at about 4 minutes each over 5 days is about 4 hours per week; automated texts are assumed to remove half.</li>
+            <li>Double entry: the owner&#x27;s estimate of about 1 hour per day; a working sync is assumed to remove most of it.</li>
+            <li>Lapsed plans: the operations manager&#x27;s estimate of about 30 plans at about $200 per year each.</li>
+            <li>Missed calls: the share of the roughly 40 weekly missed calls that were new customers is unknown, so no revenue is claimed for recommendation 3.</li>
+            <li>Feature availability depends on the current plan tier of each tool and has not been verified in this sample run.</li>
+            
+        </ul>
+        <div class="divider"></div>
+        <ul class="list source-list">
+            
+        </ul>
+    </div>
+
+</body>
+</html>
